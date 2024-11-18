@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resuelve la Secuencia</title>
+  <style>
+
+    @font-face {
+      font-family: Dumbledor;
+      src: url('dum1.ttf');
+    }
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+    body > div {
+      padding: 30px;
+    }
+    h1 {
+      font-family: Dumbledor, sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.1em;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    img {
+      max-width: 100%;
+    }
+    #customDialog {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      border: 1px solid #ccc;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      z-index: 1000;
+      text-align: center;
+      border-radius: 8px;
+      min-width: 70vw;
+      font-size: 1.5rem;
+    }
+
+    #dialogOverlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 999;
+    }
+
+    #customDialog button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #customDialog button:hover {
+      background-color: #0056b3;
+    }
+
+    @media only screen and (min-width: 800px) {
+      img {
+        max-width: 80%;
+      }
+      #customDialog {
+        min-width: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Resuelve la siguiente secuencia:</h1>
+    <br>
+    <h2>1	  2   4   7   4   2   1   2   4   __</h2>
+    <br>
+    <input type="text" id="numberInput" placeholder="Escribe un número">
+    <button onclick="checkNumber()">Enviar</button>
+
+    <div id="dialogOverlay"></div>
+    <div id="customDialog">
+      <div id="dialogMessage"></div>
+      <button onclick="closeDialog()">OK</button>
+    </div>
+  </div>
+
+  <script>
+    function checkNumber() {
+      const userInput = document.getElementById("numberInput").value;
+
+      // Check if the input is a number
+      if (isNaN(userInput) || userInput.trim() === "") {
+        showDialog("Número no válido.");
+        return;
+      }
+
+      // Check if the number is "2"
+      if (parseInt(userInput) === 7) {
+        showDialog("<img src='pista.jpg' />");
+      } else {
+        showDialog("<p>Número incorrecto. \n\n Inténtalo de nuevo.</p>");
+      }
+    }
+
+    function showDialog(message) {
+      document.getElementById("dialogMessage").innerHTML = message;
+      document.getElementById("dialogOverlay").style.display = "block";
+      document.getElementById("customDialog").style.display = "block";
+    }
+
+    function closeDialog() {
+      document.getElementById("dialogOverlay").style.display = "none";
+      document.getElementById("customDialog").style.display = "none";
+    }
+  </script>
+</body>
+</html>
